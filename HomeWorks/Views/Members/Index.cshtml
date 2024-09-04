@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HomeWorks.Models.Member>
+
+@{
+    ViewData["Title"] = "會員管理介面";
+}
+
+<div class="container mt-4">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().MeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().MeTel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().MeEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().PreId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MeTel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MeEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PreId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MeId" class="btn btn-warning">修改</a>
+                        <a href="#" class="btn btn-danger" onclick="return confirmDelete('@item.MeId');">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(memberId) {
+            return confirm('Are you sure you want to delete this member?');
+        }
+    </script>
+}

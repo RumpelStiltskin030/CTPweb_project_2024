@@ -1,0 +1,59 @@
+﻿@model HomeWorks.Models.Member
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Delete</h1>
+
+    <h3 class="mb-4">Are you sure you want to delete this member?</h3>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Member Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeTel)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeTel)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeEmail)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeEmail)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MePassword)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MePassword)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PreId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PreId)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="MeId" />
+            <button type="submit" class="btn btn-danger me-2">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>

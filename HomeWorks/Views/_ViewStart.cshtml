@@ -1,0 +1,4 @@
+﻿@{
+    Layout = Context.Session.GetString("IsLoggedIn") == "true"
+        ? "_LayoutLogout" : "_Layout";
+}

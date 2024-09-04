@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HomeWorks.ViewModel.ProductVM>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>Product</h4>
+<hr />
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-12 col-md-6">
+            @if (item.ProductDetail.Any())
+            {
+                <div id="carouselExampleIndicators" class="carousel slide" style="width: 100%; max-height: 700px;">
+                    <div class="carousel-indicators">
+                        @{
+                            int i = 0;
+                            foreach (var imgInfo in item.ProductDetail)
+                            {
+                                var buttonClass = i == 0 ? "active" : "";
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@buttonClass" aria-label="Slide @i"></button>
+                                i++;
+                            }
+                        }
+                    </div>
+                    <div class="carousel-inner">
+                        @{
+                            int j = 0;
+                            foreach (var imgInfo in item.ProductDetail)
+                            {
+                                var itemClass = j == 0 ? "carousel-item active" : "carousel-item";
+                                <div class="@itemClass">
+                                    <img src="@imgInfo.Fieldpath" class="d-block w-100" alt="Product Image" style="object-fit: cover; max-height: 700px;">
+                                </div>
+                                j++;
+                            }
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            }
+        </div>
+
+        <div class="col-12 col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => item.Product.ProName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => item.Product.ProName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => item.Product.ProPrice)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => item.Product.ProPrice)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </div>
+}

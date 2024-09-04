@@ -1,0 +1,45 @@
+﻿@model HomeWorks.ViewModel.ProductVM
+
+<h4>請問是否訂購以下商品</h4>
+<hr />
+@{
+    string src = "";
+    if (Model.ProductDetail.Any())
+    {
+        src = Model.ProductDetail[0].Fieldpath;
+    }
+}
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="card">
+            <img src="@src" class="card-img-top" alt="產品圖片">
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Product.ProName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Product.ProName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Product.ProPrice)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Product.ProPrice)
+                    </dd>
+                </dl>
+                <form asp-action="Orders">
+                    <input type="hidden" name="ProId" value="@Model.Product.ProId" />
+                    <div class="form-group">
+                        <input type="submit" value="訂購" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,121 @@
+html {
+    font-size: 14px;
+    position: relative; /* 保持原有樣式 */
+    min-height: 100%; /* 確保 html 占滿頁面高度 */
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin: 0; /* 移除所有外邊距，避免干擾布局 */
+    padding-bottom: 60px; /* 給 footer 留出空間 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 確保 body 占滿視口高度 */
+}
+
+footer {
+    padding: 10px 0;
+    background-color: #f8f9fa;
+    text-align: center;
+    width: 100%; /* 確保 footer 佔滿整個頁面寬度 */
+    position: absolute;
+    bottom: 0; /* 確保 footer 在頁面底部 */
+}
+
+.footer a {
+    color: #007bff;
+}
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+.member-menu {
+    display: none;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    padding: 10px;
+    position: absolute;
+    top: 60px; /* 根據按鈕的實際位置進行調整 */
+    right: 10px; /* 根據需要進行調整 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+    .member-menu.show {
+        display: block;
+        opacity: 1;
+    }
+
+.avatar-img {
+    width: 40px; /* 設定頭像的寬度 */
+    height: 40px; /* 設定頭像的高度 */
+    border-radius: 50%; /* 使圖像成為圓形 */
+    object-fit: cover; /* 確保圖像按比例縮放並裁剪 */
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #007bff;
+    }
+
+.dropdown-menu {
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    margin-left: 0;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    color: #333;
+}
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.modal {
+    z-index: 1050; /* Bootstrap 的默認值 */
+}
+
+.navbar {
+    z-index: 1000; /* 確保 navbar 在 modal 下 */
+}
+
+.fixed-size-container {
+    width: 450px; /* 固定容器寬度 */
+    height: 700px; /* 固定容器高度 */
+    overflow: hidden; /* 隱藏超出容器的圖片部分 */
+    position: relative; /* 讓容器作為定位參考 */
+    border: 1px solid #ddd; /* 可選：顯示邊框 */
+}
+
+    .fixed-size-container img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 100%; /* 確保圖片不超過容器寬度 */
+        max-height: 100%; /* 確保圖片不超過容器高度 */
+    }
+

@@ -1,0 +1,42 @@
+﻿@model HomeWorks.Models.Product
+
+<h3>你確定要刪除以下商品嗎?</h3>
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ProName)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ProName)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.ProPrice)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ProPrice)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post" id="deleteForm">
+    <input type="hidden" asp-for="ProId" />
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', function (event) {
+            if (!confirm('你確定要刪除這個商品嗎？這個操作無法恢復。')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+}

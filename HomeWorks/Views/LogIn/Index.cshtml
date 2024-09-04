@@ -1,0 +1,33 @@
+﻿@model HomeWorks.ViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "登入會員";
+}
+
+<h1>登入會員</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="LogIn" asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="MeId" class="control-label"></label>
+                <input asp-for="MeId" class="form-control" />
+                <span asp-validation-for="MeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MePassword" class="control-label"></label>
+                <input asp-for="MePassword" type="password" class="form-control" />
+                <span asp-validation-for="MePassword" class="text-danger"></span>
+            </div>
+            <span class="text-danger">@ViewData["ErrorMsg"]</span>
+            <button type="submit" class="btn btn-primary m-2">登入</button>
+            <a class="btn btn-secondary m-2" asp-area="" asp-controller="Members" asp-action="Create">註冊</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

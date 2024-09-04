@@ -1,0 +1,203 @@
+﻿@{
+    ViewData["Title"] = "RS委託網";
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .carousel-item img {
+            object-fit: cover;
+            height: 500px;
+            border-radius: 0.5rem;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .list-group-item {
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+        }
+
+            .list-group-item:hover {
+                background-color: #f8f9fa;
+            }
+
+        .carousel-inner .carousel-item {
+            transition: transform 0.5s ease;
+        }
+
+        .blockquote-footer {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .social-buttons i {
+            font-size: 1.25rem;
+        }
+
+        .social-buttons a {
+            color: #fff;
+        }
+
+            .social-buttons a:hover {
+                color: #e9ecef;
+            }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <!-- 輪播圖 -->
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="https://www.furryteaparty.com/?fbclid=IwY2xjawFD9wBleHRuA2FlbQIxMAABHfa2HFbY1Pz-rf30BG1Zg_OcD9GqM1sNp4hUI6NkDzPS45dXNZV3-l4Qvw_aem_cFF_FpajkX4euyGDkWYn6g">
+                        <img src="/home/0.jpg" class="d-block w-100" alt="以茶會毛">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://www.infurnity.com/?fbclid=IwY2xjawFD9yJleHRuA2FlbQIxMAABHYwDK_7XDJYgXc6kectJ4rqskThIGuJ6onL9UWw4u7eUZl3S4_hpquhxtw_aem_BxN6pf271L5M4vVkzDBovQ">
+                        <img src="/home/1.png" class="d-block w-100" alt="獸無限">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://www.furmit.com/">
+                        <img src="/home/2.jpg" class="d-block w-100" alt="FurMit">
+                    </a>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- 即將到來的活動倒計時 -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">即將到來的活動</h2>
+            <div class="d-flex justify-content-center">
+                <div id="countdown" class="text-center">
+                    <h3>距獸無限開始還剩</h3>
+                    <div id="timer" class="countdown">00天 00小時 00分鐘 00秒</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最新消息區 -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">最新消息</h2>
+            <div class="list-group">
+                <a href="https://www.facebook.com/share/p/bPvqLkLZvr8q4U5D/" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">獸無限確定在麗寶飯店開辦啦!!!</h5>
+                    <p class="mb-1">本次獸無限將在台中麗寶舉辦.....</p>
+                    <small>2024年9月4日</small>
+                </a>
+                <a href="https://www.facebook.com/share/p/pSpPdYHke9Qd4CX4/" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">2025以茶會毛將於高雄舉行</h5>
+                    <p class="mb-1">本次以茶會毛將在高雄舉辦.....</p>
+                    <small>2024年9月3日</small>
+                </a>
+                <!-- 更多消息項目 -->
+            </div>
+        </div>
+
+        <!-- 用戶評價區 -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">用戶評價</h2>
+            <div id="userReviews" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="d-block w-200 p-5 bg-light rounded">
+                            <p>“這是我用過的最佳網站，服務一流！”</p>
+                            <footer class="blockquote-footer">竹輪</footer>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-block w-200 p-5 bg-light rounded">
+                            <p>“非常滿意，會推薦給朋友。”</p>
+                            <footer class="blockquote-footer">鴻萌造物</footer>
+                        </div>
+                    </div>
+                    <!-- 更多評價項目 -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#userReviews" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#userReviews" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 聯絡我們區 -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">聯絡我們</h2>
+            <p class="text-center">如有任何問題或建議，請隨時與我們聯繫。</p>
+            <div class="text-center">
+                <a href="mailto:rumpelstiltskin0605@gmail.com" class="btn btn-primary">發送電子郵件</a>
+            </div>
+        </div>
+
+        <!-- 社交媒體連結 -->
+        <div class="container my-5">
+            <h2 class="text-center mb-4">關注我們</h2>
+            <div class="text-center social-buttons">
+                <a href="https://www.facebook.com/yourpage" class="btn btn-primary me-2" target="_blank">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+                <a href="https://twitter.com/yourprofile" class="btn btn-primary me-2" target="_blank">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="https://www.instagram.com/yourprofile" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 和 FontAwesome JavaScript -->
+    @Html.Raw("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js\"></script>")
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+    <!-- 倒計時腳本 -->
+    <script>
+        function startCountdown(eventDate) {
+            const timer = document.getElementById('timer');
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeRemaining = eventDate.getTime() - now;
+                if (timeRemaining < 0) {
+                    clearInterval(interval);
+                    timer.textContent = "活動已經開始！";
+                    return;
+                }
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                timer.textContent = `${days}天 ${hours}小時 ${minutes}分鐘 ${seconds}秒`;
+            }
+            const interval = setInterval(updateCountdown, 1000);
+        }
+
+        // 設定活動日期
+        const eventDate = new Date('2024-10-25T00:00:00');
+        startCountdown(eventDate);
+    </script>
+</body>
+</html>

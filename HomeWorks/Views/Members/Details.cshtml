@@ -1,0 +1,54 @@
+﻿@model HomeWorks.Models.Member
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Member Details</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Member Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeTel)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeTel)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MeEmail)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MeEmail)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.MePassword)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.MePassword)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PreId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PreId)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.MeId" class="btn btn-primary me-2">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

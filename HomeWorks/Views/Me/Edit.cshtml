@@ -1,0 +1,99 @@
+﻿@model HomeWorks.ViewModel.memberVM
+
+@{
+    ViewData["Title"] = "編輯";
+    var defaultImagePath = "/photo/ready.png"; // 替換為你的灰色圖片實際路徑
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-md-3 col-lg-2">
+            @await Html.PartialAsync("~/Views/Shared/view/MeChose.cshtml")
+        </div>
+
+        <div class="col-12 col-md-9 col-lg-10">
+            <div class="card border-light rounded-lg shadow-sm">
+                <div class="card-header bg-light text-dark border-bottom">
+                    <h4 class="mb-0">帳戶設置</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6 d-flex flex-column align-items-center">
+                                <img id="preview" src="@(!string.IsNullOrEmpty(Model.member.PhotoPath) ? Model.member.PhotoPath : defaultImagePath)"
+                                     alt="選擇要上傳的圖片"
+                                     class="img-fluid rounded-circle mb-3 border border-secondary"
+                                     style="max-width: 100%; max-height: 200px; object-fit: cover;" />
+                                <label for="photo" class="form-label">上傳新照片</label>
+                                <input type="file" name="photo" id="photo" class="form-control mb-3" onchange="displayImage(this)" />
+                                @if (ViewData["Message"] != null)
+                                {
+                                    <div class="alert alert-danger">@ViewData["Message"]</div>
+                                }
+                            </div>
+                            <div class="col-md-6">
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+                                <input type="hidden" asp-for="member.MeId" />
+                                <input type="hidden" asp-for="member.PreId" />
+
+                                <div class="mb-3">
+                                    <label asp-for="member.MeName" class="form-label">名字</label>
+                                    <input asp-for="member.MeName" class="form-control" placeholder="輸入名字" />
+                                    <span asp-validation-for="member.MeName" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="member.MeTel" class="form-label">電話號碼</label>
+                                    <input asp-for="member.MeTel" class="form-control" placeholder="輸入電話號碼" />
+                                    <span asp-validation-for="member.MeTel" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="member.MeEmail" class="form-label">電子郵件</label>
+                                    <input asp-for="member.MeEmail" class="form-control" placeholder="輸入電子郵件" />
+                                    <span asp-validation-for="member.MeEmail" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">目前身分:</label>
+                                    <div class="d-flex justify-content-between align-items-center text-nowrap">
+                                        <div class="form-control-plaintext bg-light p-2 rounded flex-shrink-1">
+                                            @Model.preName
+                                        </div>
+                                        <a href="@Url.Action("ChangePermission", "Me", new { id = Model.member.MeId, newPermissionId = "B" })" class="btn btn-link btn-sm">成為創作者</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary btn-sm me-2">儲存變更</button>
+                            <a href="@Url.Action("Detail", "Me")" class="btn btn-secondary btn-sm">取消</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function displayImage(input) {
+            var preview = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = "@defaultImagePath"; // 如果沒有選擇檔案，顯示預設圖片
+            }
+        }
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

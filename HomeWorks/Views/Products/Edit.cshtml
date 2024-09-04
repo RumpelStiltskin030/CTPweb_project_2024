@@ -1,0 +1,35 @@
+﻿@model HomeWorks.Models.Product
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Edit Product</h2>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="ProId" />
+
+            <div class="form-group mb-3">
+                <label asp-for="ProName" class="form-label"></label>
+                <input asp-for="ProName" class="form-control" />
+                <span asp-validation-for="ProName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ProPrice" class="form-label"></label>
+                <input asp-for="ProPrice" class="form-control" />
+                <span asp-validation-for="ProPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group my-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

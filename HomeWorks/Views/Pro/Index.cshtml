@@ -1,0 +1,54 @@
+﻿@model IEnumerable<HomeWorks.ViewModel.ProductVM>
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "所有產品";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- 使用 Bootstrap 網格系統 -->
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+                string src = "";
+                if (item.ProductDetail.Count > 0)
+                {
+                    src = item.ProductDetail[0].Fieldpath;
+                }
+                <div class="col-md-4 mb-4">
+                    <div class="card custom-card">
+                        <img src="@src" class="card-img-top" alt="產品圖片">
+                        <div class="card-body">
+                        @if (item.Product.Status == "A")
+                        {
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName)</h5>
+                        }else
+                        {
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName) (已訂購)</h5>
+                        }
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Product.ProPrice)</p>
+                            <a asp-action="Details" asp-route-id="@item.Product.ProId" class="btn btn-primary">預覽</a>
+                        @if (item.Product.Status == "A")
+                        {
+                            <a asp-action="Orders" asp-route-id="@item.Product.ProId" class="btn btn-success">購買</a>
+                        } 
+                    </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+<style>
+    .custom-card {
+        width: 100%;
+        height: 600px; /* 固定卡片高度 */
+    }
+
+        .custom-card .card-img-top {
+            height: 450px; /* 設置圖片的高度 */
+            object-fit: cover; /* 保持圖片的比例並填滿卡片 */
+        }
+</style>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HomeWorks.Models.Member>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>所有創作者</title>
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            width:100%;
+        }
+
+        .card-body {
+            flex: 1;
+        }
+
+        .card-img-top {
+            object-fit: cover; /* 保持圖片比例 */
+            height: 200px; /* 設定圖片的固定高度 */
+            width: 100%; /* 確保圖片寬度為 100% */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">所有創作者</h1>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="@item.PhotoPath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.MeName</h5>
+                            <p class="card-text">
+                                e-mail: @item.MeEmail
+                                <br />
+                                tel: @item.MeTel
+                            </p>
+                            <a asp-action="HeIndex" asp-route-id="@item.MeId" class="btn btn-primary">查看</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

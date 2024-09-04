@@ -1,0 +1,102 @@
+﻿@model HomeWorks.ViewModel.OrderVM
+
+<div class="container mt-4">
+    <!-- 購買者資訊 -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">購買者資訊</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.buyMember.MeId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.buyMember.MeId)
+                </dd>
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.buyMember.MeName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.buyMember.MeName)
+                </dd>
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.buyMember.MeTel)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.buyMember.MeTel)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- 訂單資訊 -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">訂單資訊</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.Order.OrdDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Order.OrdDate)
+                </dd>
+
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.Order.OrderDetails.First().Specification)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Order.OrderDetails.First().Specification)
+                </dd>
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.Order.OrderDetails.First().Pricing)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Order.OrderDetails.First().Pricing)
+                </dd>
+
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.Order.DateLine)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Order.DateLine)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- 銷售者資訊 -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">銷售者資訊</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.saleMember.MeId)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.saleMember.MeId)
+                </dd>
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.saleMember.MeName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.saleMember.MeName)
+                </dd>
+                <dt class="col-sm-3 text-muted">
+                    @Html.DisplayNameFor(model => model.saleMember.MeTel)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.saleMember.MeTel)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+        <a class="btn btn-secondary" asp-action="Index">返回列表</a>
+    </div>
+</div>

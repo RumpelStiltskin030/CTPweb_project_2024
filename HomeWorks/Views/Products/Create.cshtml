@@ -1,0 +1,62 @@
+﻿@model HomeWorks.Models.Product
+
+@{
+    ViewData["Title"] = "新增商品";
+}
+<h4>新增商品</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ProName" class="control-label"></label>
+                <input asp-for="ProName" class="form-control" />
+                <span asp-validation-for="ProName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProPrice" class="control-label"></label>
+                <input asp-for="ProPrice" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="ProPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="photo" class="form-label">上傳新照片</label>
+                <input type="file" name="photo" id="photo" class="form-control mb-3" />
+                <img id="previewImage" src="#" alt="圖片預覽" class="img-thumbnail d-none" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="上傳" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">回到我的產品</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById('photo').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('previewImage').classList.add('d-none');
+            }
+        });
+    </script>
+}
