@@ -38,15 +38,22 @@
                             {
                                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName)</h5>
                             }
-                            else
+                            @if (item.Product.Status == "B")
                             {
                                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName) (已訂購)</h5>
                             }
+                            @if (item.Product.Status == "C")
+                            {
+                                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName) (已售出)</h5>
+                            }
                             <p class="card-text">@Html.DisplayFor(modelItem => item.Product.ProPrice)</p>
+                            @if (item.Product.Status != "C")
+                            {
                             <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#EditModal" data-product-id="@item.Product.ProId">
                                 編輯
                             </a>
                             <a asp-action="Details" asp-route-id="@item.Product.ProId" class="btn btn-primary">預覽</a>
+                            }
                             <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-product-id="@item.Product.ProId">
                                 刪除
                             </a>

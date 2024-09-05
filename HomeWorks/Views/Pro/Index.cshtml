@@ -24,9 +24,14 @@
                         @if (item.Product.Status == "A")
                         {
                             <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName)</h5>
-                        }else
+                        }
+                        @if (item.Product.Status == "B")
                         {
                             <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName) (已訂購)</h5>
+                        }
+                        @if (item.Product.Status == "C")
+                        {
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Product.ProName) (被購買)</h5>
                         }
                             <p class="card-text">@Html.DisplayFor(modelItem => item.Product.ProPrice)</p>
                             <a asp-action="Details" asp-route-id="@item.Product.ProId" class="btn btn-primary">預覽</a>

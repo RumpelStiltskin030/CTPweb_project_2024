@@ -8,6 +8,15 @@
         </div>
 
         <div class="col-12 col-md-9 col-lg-10">
+             @if (!Model.Any())
+            {
+                <!-- 如果沒有訂單，顯示這條消息 -->
+                <div class="alert alert-info" role="alert">
+                    沒有訂單。
+                </div>
+            }
+            else
+            {
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -36,8 +45,10 @@
                             </td>
                         </tr>
                     }
+                    
                 </tbody>
             </table>
+            }
         </div>
     </div>
 

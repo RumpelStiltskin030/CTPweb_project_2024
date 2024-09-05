@@ -21,7 +21,7 @@ namespace HomeWorks.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var rS0605Context = _context.Products.Include(p => p.Me).Include(p => p.ProductDetails);
+            var rS0605Context = _context.Products.Include(p => p.Me).Include(p => p.ProductDetails).Where(p=>p.Status=="A");
             List<ProductVM> productVMs = new List<ProductVM>();
             foreach (var item in rS0605Context.ToList())
             {
