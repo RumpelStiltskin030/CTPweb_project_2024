@@ -16,6 +16,12 @@ namespace HomeWorks.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var me = await _context.Members.Where(p => p.PreId == "B").ToListAsync();
+            return View(me);
+        }
+
         // GET: Members
         public async Task<IActionResult> HeIndex(string id)
         {
