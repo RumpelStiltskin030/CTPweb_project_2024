@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomeWorks.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using HomeWorks.Configuration;
 
 namespace HomeWorks.Controllers
 {
     public class MembersController : Controller
     {
         private readonly RS0605Context _context;
+        private readonly IMailService _mailService;
 
-        public MembersController(RS0605Context context)
+        public MembersController(RS0605Context context , IMailService mailService)
         {
             _context = context;
+            _mailService = mailService;
         }
 
         // GET: Members
@@ -39,6 +43,8 @@ namespace HomeWorks.Controllers
                 return NotFound();
             }
 
+
+
             return View(member);
         }
 
@@ -55,13 +61,38 @@ namespace HomeWorks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MeId,MeName,MeTel,MeEmail,MePassword,PreId")] Member member)
         {
-            if (ModelState.IsValid)
-            {
+
+                member.MeId = fairy.GenerateRandomId(8, 12); // 隨機生成8到12位的帳號
+                member.PreId = "A"; // 設置固定的 PreId
+
                 _context.Add(member);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+            var mailData = new MailData
+            {
+                EmailToId = member.MeEmail,
+                EmailToName = member.MeName,
+                EmailSubject = "您已成功註冊!!!",
+                EmailBody = $" {member.MeName} 您好 ,<br>您的帳號已成功建立。您的新帳號為 {member.MeId} ，請務必保管好自己的帳號。"
+            };
+
+            // 發送電子郵件
+            var emailSent = _mailService.SendMail(mailData);
+
+            if (emailSent)
+            {
+                // 處理成功邏輯
+                return RedirectToAction("Index", "LogIn");
             }
-            return View(member);
+            else
+            {
+                // 處理失敗邏輯
+                ModelState.AddModelError("", "Failed to send email.");
+            }
+
+            return RedirectToAction("Index", "LogIn");
+
         }
 
         // GET: Members/Edit/5

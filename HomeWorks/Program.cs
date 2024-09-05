@@ -2,8 +2,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HomeWorks.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using HomeWorks.Configuration;
+using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddTransient<IMailService, MailService>();
 
 builder.Services.AddDbContext<RS0605Context>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("RS0605Connection")));
@@ -18,7 +25,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Login/AccessDenied";
     });
 
-
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 // 添加授權
 builder.Services.AddAuthorization(options =>
@@ -54,7 +61,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -70,5 +76,45 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+// 配置 HTTP 請求管道
+//if (!app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseHsts();
+//}
+
+//app.UseHttpsRedirection();
+//app.UseStaticFiles();
+//app.UseRouting();
+//app.UseAuthorization();
+
+
+///
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI(c =>
+//    {
+//        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//        c.RoutePrefix = string.Empty; // 設置 Swagger UI 在應用根目錄
+//    });
+//}
+
+//app.UseHttpsRedirection();
+//app.UseAuthorization();
+//app.MapControllers();
+
+
+
+
+//app.UseRouting();
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}");
+//});
 
 app.Run();
