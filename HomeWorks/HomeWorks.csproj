@@ -23,4 +23,11 @@
     <Folder Include="wwwroot\photo\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Me\SaleDel.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -369,6 +369,53 @@ namespace HomeWorks.Controllers
             return RedirectToAction("OrderSale", new { id = meId });
         }
 
+        public async Task<IActionResult> SaleDel(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var order = await _context.Orders
+                .Include(p => p.Me)
+                .FirstOrDefaultAsync(m => m.OrdId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("SaleDel", order);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost, ActionName("SaleDel")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaleDelConfirmed(string id, [Bind("OrdId")] Order orders)
+        {
+
+            var order = await _context.Orders
+            .Include(p => p.OrderDetails) // 包含產品細節
+            .FirstOrDefaultAsync(m => m.OrdId == orders.OrdId);
+
+            if (order != null)
+            {
+                // 移除產品細節
+                _context.OrderDetails.RemoveRange(order.OrderDetails);
+                // 移除產品
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+                var productInfo = _context.Products.FirstOrDefault(x => x.ProId == order.OrderDetails.First().ProId);
+                productInfo.Status = "A";
+                _context.Products.Update(productInfo);
+                await _context.SaveChangesAsync();
+
+            }
+
+
+
+            string meId = HttpContext.Session.GetString("LoggedInID");
+
+            return RedirectToAction("OrderSale", new { id = meId });
+        }
     }
 }

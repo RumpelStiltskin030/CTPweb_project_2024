@@ -87,7 +87,7 @@
             // 取消訂單按鈕點擊事件
             $(document).on('click', '.btn-cancel-order', function () {
                 var orderId = $(this).data('order-id');
-                var url = '@Url.Action("OrderDel", "Me")/' + orderId;
+                var url = '@Url.Action("SaleDel", "Me")/' + orderId;
                 $('#modal-delete-body-content').load(url);
                 $('#DeleteModal').modal('show');
             });
