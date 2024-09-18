@@ -1,4 +1,8 @@
 ﻿@{
-    Layout = Context.Session.GetString("IsLoggedIn") == "true"
-        ? "_LayoutLogout" : "_Layout";
+    Layout = Context.Session.GetString("IsLoggedIn") == "true" &&
+             Context.Session.GetString("UserRole") == "Z"
+        ? "_LayoutUser"
+        : (Context.Session.GetString("IsLoggedIn") == "true"
+            ? "_LayoutLogout"
+            : "_Layout");
 }

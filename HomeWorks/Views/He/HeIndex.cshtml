@@ -44,13 +44,16 @@
             <div class="col-md-12">
                 <div class="profile-card card">
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row align-items-center">
+                            <!-- 左側欄位 -->
                             <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center p-3">
                                 <a target="_blank" class="link-primary d-flex align-items-center justify-content-center" href="@(!string.IsNullOrEmpty(Model.Member.PhotoPath) ? Model.Member.PhotoPath : "/photo/ready.jpg")">
-                                    <img src="@(!string.IsNullOrEmpty(Model.Member.PhotoPath) ? Model.Member.PhotoPath : "/photo/ready.png")" alt="Member Photo" class="profile-img rounded-circle">
+                                    <img src="@(!string.IsNullOrEmpty(Model.Member.PhotoPath) ? Model.Member.PhotoPath : "/photo/ready.png")" alt="會員照片" class="profile-img rounded-circle">
                                 </a>
                             </div>
-                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center p-3">
+
+                            <!-- 會員資訊欄位 -->
+                            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center p-3">
                                 <div class="mb-2">
                                     <span class="font-weight-bold" style="font-size: 1.5rem;">
                                         @Model.Member.MeName
@@ -68,19 +71,43 @@
                                         <i class="fas fa-pen"></i>
                                     </a>
                                 </div>
-                                </div>
+                            </div>
+
+                            <!-- 右側欄位 -->
+                            <div class="col-12 col-lg-3 d-flex justify-content-end align-items-center p-3">
+                                <!-- 使用 ml-2 來添加一些左邊距，或者根據需要調整 -->
+                                <a class="ml-2 btn btn-primary btn-order" @* asp-controller="He" asp-action="OrderHe" asp-route-id="@Model.Member.MeId" *@>我要委託</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- 詳情模態框 -->
+    <div class="modal fade" id="OrderModal" tabindex="-1" aria-labelledby="OrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="OrderModalLabel">我要委託</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body-content">
+                    <!-- 詳情內容會載入到這裡 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
         <!-- 產品列表 -->
         <h2 class="mt-4">@Model.Member.MeName 的產品</h2>
         <div class="row">
             @foreach (var item in Model.Products)
             {
+                if (item.Product.Status != "D") 
+                    { 
                             string src = "";
                             if (item.ProductDetail.Count > 0)
                             {
@@ -119,8 +146,21 @@
                             object-fit: cover; /* 保持圖片的比例並填滿卡片 */
                         }
                 </style>
+                }
             }
         </div>
     </div>
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).on('click', '.btn-order', function () {
+                var MeId = @Model.Member.MeId;
+                var url = '@Url.Action("OrderHe", "He")' + '/' + MeId;
+                $('#modal-body-content').load(url);
+                $('#OrderModal').modal('show');
+            });
+        </script>
+    }
 </body>
 </html>

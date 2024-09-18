@@ -24,7 +24,9 @@
         {
             if (item.Product.MeId == id)
             {
-                string src = "";
+              if (item.Product.Status != "D") 
+              { 
+                        string src = "";
                 if (item.ProductDetail.Count > 0)
                 {
                     src = item.ProductDetail[0].Fieldpath;
@@ -60,6 +62,7 @@
                         </div>
                     </div>
                 </div>
+            }
             }
         }
     </div>

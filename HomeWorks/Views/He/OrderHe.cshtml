@@ -1,0 +1,25 @@
+﻿@model HomeWorks.ViewModel.OrderVM
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="OrderHe" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderDetail.Specification" class="control-label"></label>
+                <input asp-for="OrderDetail.Specification" class="form-control" />
+                <span asp-validation-for="OrderDetail.Specification" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="photo" class="form-label">上傳新照片</label>
+                <input type="file" name="photo" id="photo" class="form-control mb-3" />
+                <img id="previewImage" src="#" alt="圖片預覽" class="img-thumbnail d-none" />
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

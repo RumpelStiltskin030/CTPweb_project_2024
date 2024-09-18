@@ -53,11 +53,20 @@ namespace HomeWorks.Controllers
 
         public IActionResult Orders(string id)
         {
+            var meid = HttpContext.Session.GetString("LoggedInID");
+            if (string.IsNullOrEmpty(meid))
+            {
+                // 如果未登錄，重定向到註冊頁面
+                return RedirectToAction("Create", "Members"); // 假設註冊方法在 Account 控制器中
+            }
+
             var rS0605Context = _context.Products.Include(p => p.Me).Include(p => p.ProductDetails).FirstOrDefault(x => x.ProId == id);
-            var productVMs = new ProductVM();
-            productVMs.Product = rS0605Context;
-            productVMs.ProductDetail = rS0605Context?.ProductDetails?.ToList();
-            
+            var productVMs = new ProductVM
+            {
+                Product = rS0605Context,
+                ProductDetail = rS0605Context?.ProductDetails?.ToList()
+            };
+
             return View(productVMs);
         }
 
@@ -65,8 +74,13 @@ namespace HomeWorks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Orders(string id, Product product)
         {
-            var meid = HttpContext.Session.GetString("LoggedInID") ?? "";
-            var orderId = fairy.CreartOrderId();
+            var meid = HttpContext.Session.GetString("LoggedInID");
+            if (string.IsNullOrEmpty(meid))
+            {
+                // 如果未登錄，重定向到註冊頁面
+                return RedirectToAction("Register", "Account"); // 假設註冊方法在 Account 控制器中
+            }
+            string orderId = fairy.CreartOrderId();
             if (product != null)
             {
                 var productInfo = _context.Products.FirstOrDefault(x => x.ProId == product.ProId);
@@ -93,11 +107,12 @@ namespace HomeWorks.Controllers
                 };
                 _context.OrderDetails.Add(orderDetail);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                return Redirect($"/He/HeIndex/{productInfo.MeId}");
             }
             else
             {
-                return RedirectToAction("Index");
+                return Redirect($"/He/HeIndex/{product.MeId}");
             }
         }
 

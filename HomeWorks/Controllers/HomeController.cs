@@ -56,5 +56,12 @@ namespace HomeWorks.Controllers
             return View();
         }
 
+        public IActionResult Test() 
+        {
+            int a = 0;
+            int s = 100/a;
+            return View();
+        }
+
     }
 }

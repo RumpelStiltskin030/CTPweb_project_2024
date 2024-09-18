@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<HomeWorks.ViewModel.ProductVM>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "產品一覽";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h4>Product</h4>
 <hr />
 
 @foreach (var item in Model)
@@ -70,6 +69,6 @@
     </div>
 
     <div>
-        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        <a asp-controller="He" asp-action="HeIndex" asp-route-id="@item.Product.MeId" class="btn btn-primary">返回</a>
     </div>
 }

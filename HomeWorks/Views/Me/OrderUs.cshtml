@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HomeWorks.ViewModel.OrderVM>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 col-md-9 col-lg-10">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.First().OrderDetail.Specification)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().OrderDetail.Pricing)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Order.OrdDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Order.DateLine)</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.OrderDetail.Specification)</td>
+                            <td>@Html.DisplayFor(modelItem => item.OrderDetail.Pricing)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Order.OrdDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Order.DateLine)</td>
+                            <td>
+                                <button class="btn btn-danger btn-cancel-order" data-order-id="@item.Order.OrdId">
+                                    取消訂單
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 取消訂單模態框 -->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DeleteModalLabel">取消訂單</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-delete-body-content">
+                    <!-- 編輯內容會載入到這裡 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+            // 取消訂單按鈕點擊事件
+            $(document).on('click', '.btn-cancel-order', function () {
+                var orderId = $(this).data('order-id');
+                var url = '@Url.Action("SaleDel", "Me")/' + orderId;
+                $('#modal-delete-body-content').load(url);
+                $('#DeleteModal').modal('show');
+            });
+        });
+    </script>
+}

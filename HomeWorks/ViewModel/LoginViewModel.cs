@@ -6,7 +6,7 @@ namespace HomeWorks.ViewModel
     {
         [Display(Name = "會員帳號")]
         [Required(ErrorMessage = "必填")]
-        [RegularExpression("[0-9]{8}", ErrorMessage = "請輸入八位數字")]
+        [RegularExpression("^[0-9]{8,12}$", ErrorMessage = "請輸入8到12位數字")]
         public string MeId { get; set; } = null!;
         [Display(Name = "會員密碼")]
         [Required(ErrorMessage = "必填")]

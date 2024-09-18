@@ -292,6 +292,21 @@ namespace HomeWorks.Controllers
             return View(orderVMs);
         }
 
+        public async Task<IActionResult> OrderUs(string id)
+        {
+            var rS0605Context = _context.Orders
+                .Include(p => p.OrderDetails);
+            List<OrderVM> orderVMs = new List<OrderVM>();
+            foreach (var item in rS0605Context)
+            {
+                OrderVM orderVM = new OrderVM();
+                orderVM.Order = item;
+                orderVM.OrderDetail = item.OrderDetails.First();
+                orderVMs.Add(orderVM);
+            }
+
+            return View(orderVMs);
+        }
 
         public async Task<IActionResult> Sale(string id)
         {

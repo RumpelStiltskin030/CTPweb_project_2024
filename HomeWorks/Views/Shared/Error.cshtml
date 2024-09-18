@@ -3,10 +3,23 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="text-center" style="margin-top: 100px;">
+    <h1 class="text-danger">404 - Not Found</h1>
+    <h2 class="text-danger">這裡沒有你要找的網頁，不過有隻很棒的龍在這邊。</h2>
+    <img src="~/photo/error.png" alt="Error Dragon" class="img-fluid" />
+    <div style="margin-top: 20px;">
+        <a href="/" class="btn btn-primary">回首頁</a>
+    </div>
+</div>
 
-@if (Model.ShowRequestId)
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+</style>
+
+
+@* @if (Model.ShowRequestId)
 {
     <p>
         <strong>Request ID:</strong> <code>@Model.RequestId</code>
@@ -23,3 +36,4 @@
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
 </p>
+ *@

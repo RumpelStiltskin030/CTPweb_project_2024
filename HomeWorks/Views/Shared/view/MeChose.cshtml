@@ -5,10 +5,8 @@
     // 獲取用戶權限代號和ID
     string userRole = HttpContextAccessor.HttpContext.Session.GetString("UserRole");
     string id = HttpContextAccessor.HttpContext.Session.GetString("LoggedInID");
-    var myParam = ViewData["TEST"] as string;
 
 }
-<p>参数值是: @myParam</p>
 <div class="container-fluid">
     <nav class="nav flex-column">
         <ul class="nav-list">
